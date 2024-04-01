@@ -5,7 +5,7 @@ import sys
 pygame.init()
 
 # Установка размера окна
-CELL_SIZE = 32  # Увеличьте размер ячейки для лучшей видимости
+CELL_SIZE = 16  # Увеличьте размер ячейки для лучшей видимости
 FPS = 60
 
 def load_map(filename):
@@ -45,8 +45,10 @@ def main():
     # Загрузка текстур
     ground_texture = pygame.image.load('grass.png')
     wall_texture = pygame.image.load('wall.png')
-    player_texture = pygame.Surface((CELL_SIZE, CELL_SIZE))
-    player_texture.fill((255, 0, 0))  # Красный цвет для игрока
+    water_texture = pygame.image.load('water.png')
+    player_image = pygame.image.load('player.png')
+    drowning_player_image = pygame.image.load('drowning_player.png')  # Изображение игрока, когда он тонет
+    player_image_height = player_image.get_height() // 2  # Уменьшаем высоту изображения игрока в два раза
 
     clock = pygame.time.Clock()
     while True:
@@ -63,26 +65,35 @@ def main():
         if keys[pygame.K_LEFT]:
             if player_col > 0 and game_map[player_row][player_col - 1] != 'W':
                 player_col -= 1
+                pygame.time.delay(100)  # Задержка 100 миллисекунд
         elif keys[pygame.K_RIGHT]:
             if player_col < grid_width - 1 and game_map[player_row][player_col + 1] != 'W':
                 player_col += 1
+                pygame.time.delay(100)  # Задержка 100 миллисекунд
         elif keys[pygame.K_UP]:
             if player_row > 0 and game_map[player_row - 1][player_col] != 'W':
                 player_row -= 1
+                pygame.time.delay(100)  # Задержка 100 миллисекунд
         elif keys[pygame.K_DOWN]:
             if player_row < grid_height - 1 and game_map[player_row + 1][player_col] != 'W':
                 player_row += 1
+                pygame.time.delay(100)  # Задержка 100 миллисекунд
 
         # Отрисовка
         for y in range(grid_height):
             for x in range(grid_width):
                 if game_map[y][x] == 'W':
                     WINDOW.blit(wall_texture, (x * CELL_SIZE, y * CELL_SIZE))
+                elif game_map[y][x] == 'B':
+                    WINDOW.blit(water_texture, (x * CELL_SIZE, y * CELL_SIZE))
                 else:
                     WINDOW.blit(ground_texture, (x * CELL_SIZE, y * CELL_SIZE))
 
         # Отрисовка игрока
-        WINDOW.blit(player_texture, (player_col * CELL_SIZE, player_row * CELL_SIZE))
+        if game_map[player_row][player_col] == 'B':
+            WINDOW.blit(drowning_player_image, (player_col * CELL_SIZE, player_row * CELL_SIZE))
+        else:
+            WINDOW.blit(player_image, (player_col * CELL_SIZE, player_row * CELL_SIZE))
 
         pygame.display.flip()
         clock.tick(FPS)

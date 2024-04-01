@@ -7,7 +7,7 @@ pygame.init()
 # Set window size and cell size
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 640
-CELL_SIZE = 32
+CELL_SIZE = 16
 FPS = 60
 
 # Colors
@@ -18,6 +18,7 @@ RED = (255, 0, 0)
 # Textures
 wall_texture = pygame.image.load('wall.png')
 ground_texture = pygame.image.load('grass.png')
+water_texture = pygame.image.load('water.png')  # Assuming you have a water texture
 player_texture = pygame.Surface((CELL_SIZE, CELL_SIZE))
 player_texture.fill(RED)  # Red color for the player
 
@@ -79,6 +80,8 @@ def main():
                     selected_tile = '.'  # Ground
                 elif event.key == pygame.K_2:
                     selected_tile = 'W'  # Wall
+                elif event.key == pygame.K_3:
+                    selected_tile = 'B'  # Water
                 elif event.key == pygame.K_s and pygame.key.get_mods() & pygame.KMOD_CTRL:
                     save_map(game_map)
                     print("Map saved!")
@@ -124,6 +127,8 @@ def main():
                     WINDOW.blit(wall_texture, (x * CELL_SIZE, y * CELL_SIZE))
                 elif game_map[y][x] == 'P':
                     WINDOW.blit(player_texture, (x * CELL_SIZE, y * CELL_SIZE))
+                elif game_map[y][x] == 'B':
+                    WINDOW.blit(water_texture, (x * CELL_SIZE, y * CELL_SIZE))
                 else:
                     WINDOW.blit(ground_texture, (x * CELL_SIZE, y * CELL_SIZE))
 
