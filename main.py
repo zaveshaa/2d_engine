@@ -79,19 +79,19 @@ def main():
         if not is_in_boat:
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT]:
-                if player_col > 0 and game_map[player_row][player_col - 1] != 'B':
+                if player_col > 0 and game_map[player_row][player_col - 1] not in ['B', 'W']:
                     player_col -= 1
                     pygame.time.delay(100)  # Задержка 100 миллисекунд
             elif keys[pygame.K_RIGHT]:
-                if player_col < grid_width - 1 and game_map[player_row][player_col + 1] != 'B':
+                if player_col < grid_width - 1 and game_map[player_row][player_col + 1] not in ['B', 'W']:
                     player_col += 1
                     pygame.time.delay(100)  # Задержка 100 миллисекунд
             elif keys[pygame.K_UP]:
-                if player_row > 0 and game_map[player_row - 1][player_col] != 'B':
+                if player_row > 0 and game_map[player_row - 1][player_col] not in ['B', 'W']:
                     player_row -= 1
                     pygame.time.delay(100)  # Задержка 100 миллисекунд
             elif keys[pygame.K_DOWN]:
-                if player_row < grid_height - 1 and game_map[player_row + 1][player_col] != 'B':
+                if player_row < grid_height - 1 and game_map[player_row + 1][player_col] not in ['B', 'W']:
                     player_row += 1
                     pygame.time.delay(100)  # Задержка 100 миллисекунд
         else:
