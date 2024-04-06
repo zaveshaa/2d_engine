@@ -1,3 +1,7 @@
+# TODO
+# day / night switch 
+# inventory
+
 import pygame
 import sys
 
@@ -119,6 +123,7 @@ def main():
                 x, y = pygame.mouse.get_pos()
                 col = x // CELL_SIZE
                 row = y // CELL_SIZE
+                
                 if row < map_height:
                     if selected_tile == 'P':
                         if game_map[row][col] in ('.', 'S'):

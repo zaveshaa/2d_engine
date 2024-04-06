@@ -1,3 +1,5 @@
+# TODO 
+
 import pygame
 import sys
 
@@ -45,11 +47,11 @@ def main():
     # Загрузка текстур
     ground_texture = pygame.image.load('grass.png')
     wall_texture = pygame.image.load('wall.png')
-    water_texture = pygame.image.load('water.png')
-    sand_texture = pygame.image.load('sand.png')  # Новая текстура для песка
+    water_texture = pygame.image.load('water.png') 
+    sand_texture = pygame.image.load('sand.png')
     player_image = pygame.image.load('player.png')
-    boat_image = pygame.image.load('boat.png')  # Текстура для лодки
-    player_image_height = player_image.get_height() // 2  # Уменьшаем высоту изображения игрока в два раза
+    boat_image = pygame.image.load('boat.png')
+    player_image_height = player_image.get_height() // 2
 
     # Состояние игрока (обычный или в лодке)
     is_in_boat = False
