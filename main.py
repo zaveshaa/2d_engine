@@ -1,4 +1,6 @@
-# TODO 
+# TODO
+# day / night switch 
+# inventory
 
 import pygame
 import sys
