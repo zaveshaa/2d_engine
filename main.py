@@ -1,5 +1,5 @@
-# TODO
-# day / night switch 
+
+# night switch 
 # inventory
 
 import pygame
